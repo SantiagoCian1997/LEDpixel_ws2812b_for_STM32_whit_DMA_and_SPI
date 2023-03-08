@@ -22,6 +22,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
+#include "ws2812b_SPI_DMA.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -96,6 +98,19 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+
+  ws2812b_init(&hspi1);
+
+  ///////////////////////////////////////////  EXAMPLE  /////////////////////////////////////////////////////////////
+  uint16_t cont=0;
+  for(;;){
+	  for(uint16_t led=0; led<N_pixel; led++) ws2812b_set_ledHSV(led, (double)led*360/N_pixel + (double)cont, 1, 1);
+	  cont += 1;
+	  cont %= 360;
+	  HAL_Delay(15);
+  }
+  ///////////////////////////////////////// end  EXAMPLE  ////////////////////////////////////////////////////////////
+
   while (1)
   {
     /* USER CODE END WHILE */
